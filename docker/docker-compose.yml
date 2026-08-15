@@ -1,0 +1,23 @@
+# version: '3.9'
+
+services:
+  # MongoDB — use MongoDB Atlas in production for Vector Search
+  # Locally, Atlas Vector Search requires MongoDB Atlas Local (mongot sidecar)
+  mongodb:
+    image: mongodb/mongodb-atlas-local:latest
+    container_name: kb_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGODB_INITDB_ROOT_USERNAME: root
+      MONGODB_INITDB_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", 'db.adminCommand("ping")']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mongo_data:
