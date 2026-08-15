@@ -1,10 +1,10 @@
-# 🧠 Knowledge Base — AI-Powered Internal Search
+# Knowledge Base — AI-Powered Internal Search
 
 > A full-stack MERN application with **RAG** (Retrieval-Augmented Generation) and **MCP** (Model Context Protocol) that lets teams ask natural-language questions over their internal documents.
 
 ---
 
-## ✨ Features
+## Features
 
 - **Upload** PDF, DOCX, TXT, MD files
 - **Auto-chunking & embedding** via OpenAI `text-embedding-3-small`
@@ -15,7 +15,7 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -46,7 +46,7 @@
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -81,11 +81,13 @@ docker compose -f docker/docker-compose.yml up -d
 ### 4. Create the Vector Search Index
 
 **Option A — MongoDB Atlas UI:**
+
 1. Go to Atlas → your cluster → Search → Create Search Index
 2. Choose "JSON Editor", select your collection `document_chunks`
 3. Paste the contents of `docker/atlas-vector-search-index.json`
 
 **Option B — Atlas CLI:**
+
 ```bash
 atlas deployments search indexes create \
   --deploymentName <your-cluster> \
@@ -107,7 +109,7 @@ Open [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 knowledge-base/
@@ -137,32 +139,32 @@ knowledge-base/
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/api/v1/documents/upload` | Upload a document |
-| `GET` | `/api/v1/documents` | List all documents |
-| `DELETE` | `/api/v1/documents/:id` | Delete a document |
-| `GET` | `/api/v1/search?q=...&topK=5` | Semantic search |
-| `POST` | `/api/v1/chat` | Chat (JSON response) |
-| `POST` | `/api/v1/chat/stream` | Chat (SSE stream) |
+| Method   | Path                          | Description          |
+| -------- | ----------------------------- | -------------------- |
+| `POST`   | `/api/v1/documents/upload`    | Upload a document    |
+| `GET`    | `/api/v1/documents`           | List all documents   |
+| `DELETE` | `/api/v1/documents/:id`       | Delete a document    |
+| `GET`    | `/api/v1/search?q=...&topK=5` | Semantic search      |
+| `POST`   | `/api/v1/chat`                | Chat (JSON response) |
+| `POST`   | `/api/v1/chat/stream`         | Chat (SSE stream)    |
 
 Swagger docs: [http://localhost:3001/api/docs](http://localhost:3001/api/docs)
 
 ---
 
-## 🛠️ MCP Tools
+## MCP Tools
 
-| Tool | Description |
-|------|-------------|
+| Tool                    | Description                                     |
+| ----------------------- | ----------------------------------------------- |
 | `search_knowledge_base` | Semantic search returning top-K relevant chunks |
 
 Claude autonomously decides when to call tools based on the user's question.
 
 ---
 
-## 🧩 Adding More MCP Tools
+## Adding More MCP Tools
 
 Edit `apps/api/src/modules/mcp/mcp.service.ts`:
 
@@ -181,16 +183,16 @@ case 'get_document_summary':
 
 ---
 
-## 🚢 Deployment
+## Deployment
 
-| Service | Platform |
-|---------|----------|
-| React frontend | Vercel |
-| NestJS API | Railway / Render |
+| Service                 | Platform                     |
+| ----------------------- | ---------------------------- |
+| React frontend          | Vercel                       |
+| NestJS API              | Railway / Render             |
 | MongoDB + Vector Search | MongoDB Atlas (M0 free tier) |
 
 ---
 
-## 📄 License
+## License
 
 MIT
